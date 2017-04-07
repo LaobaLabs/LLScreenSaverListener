@@ -19,11 +19,11 @@ protocol LLScreenSaverListenerDelegate
 
 class LLScreenSaverListener: NSObject
 {
-    var delegate : LLScreenSaverListenerDelegate!
+    var delegate : LLScreenSaverListenerDelegate?
     
-    convenience init(withDelegate givenDelegate : LLScreenSaverListenerDelegate)
+    init(withDelegate givenDelegate : LLScreenSaverListenerDelegate)
     {
-        self.init()
+        super.init()
         
         delegate = givenDelegate
         
@@ -40,12 +40,20 @@ class LLScreenSaverListener: NSObject
     func handleScreenSaverLocked()
     {
         //Do anything else you want to do here before telling the delegate
-        delegate.handleScreenSaverLocked()
+        
+        if let delegate = delegate
+        {
+            delegate.handleScreenSaverLocked()
+        }
     }
 
     func handleScreenSaverUnlocked()
     {
         //Do anything else you want to do here before telling the delegate
-        delegate.handleScreenSaverUnlocked()
+        
+        if let delegate = delegate
+        {
+            delegate.handleScreenSaverUnlocked()
+        }
     }
 }
